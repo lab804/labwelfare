@@ -81,7 +81,11 @@ def read(filename, ws_index=0):
     return wb
 
 
-def find_col_by_re(pattern, ws, row_limit=None, col_limit=None):
+def find_col_by_re(patterns,
+                   ws,
+                   row_limit=None,
+                   col_limit=None,
+                   multiple=False):
     """Find column by regex pattern.
 
     Args:
@@ -94,11 +98,27 @@ def find_col_by_re(pattern, ws, row_limit=None, col_limit=None):
         tuple: containing the row and column of the pattern instance.
     """
     # TODO: check limit of row and column
-    for row in ws.rows:
+    first_matches = []
+    for row in ws.iter_rows(max_row=row_limit, max_col=col_limit):
         # rcell equal cell read only
         for rcell in row:
-            if rcell.value and re.match(pattern, rcell.value):
+            if rcell.value and re.match(patterns[0], rcell.value):
                 LOGGER.debug("Found pattern: {} on row: {}, col: {}".format(
-                    pattern, rcell.row, rcell.column))
-                return (rcell.row, rcell.column)
+                    patterns[0], rcell.row, rcell.column))
+                if multiple:
+                    first_matches.append((rcell.row, rcell.column))
+                else:
+                    return (rcell.row, rcell.column)
+        if len(first_matches) > 0:
+            break
+    # "multiple" in case the pattern is on two lines ex. connect
+    # worksheet column 3: Row 2 == Temp. and Line 3 == Ext.
+    # Below is only true when the column of the previous row is the
+    # same as the current row the counter has 2 and obviously the
+    # multiple argument is true.
+    for row, col in first_matches:
+        rcell = ws.cell(row + 1, col)
+        if rcell.value and re.match(patterns[1], rcell.value):
+            return (rcell.row, rcell.column)
+
     return (None, None)
