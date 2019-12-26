@@ -12,11 +12,10 @@ Lab Welfare
 	:target: https://labwelfare.readthedocs.io/en/latest/?badge=latest
 	:alt: Documentation Status
 
-
 The purpose of this package is to calculate the heat load index of the various
 genotypes using the method proposed by Gaugh, besides offering a calculation 
 to find the value of the temperature in the black globe in which is essential 
-for the method proposed by Gaugh, other utilities as risk index. , alerting, 
+for the method proposed by Gaugh, other utilities as risk index, alerting, 
 reporting with historical analysis of pens.
 
 Features
