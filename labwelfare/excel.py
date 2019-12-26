@@ -27,8 +27,21 @@ LOGGER = logging.getLogger(__name__)
 
 
 def get_ws(wb, ws_index):
-    """Getting working sheet."""
+    """Getting working sheet.
+
+    Args:
+        ws (openpyxl.worksheet.workbook.Workbook): workbook.
+        ws_index (int): index work sheet.
+
+    Returns:
+        ws (openpyxl.worksheet.worksheet.Worksheet): working sheet.
+
+    Raises:
+        ValueError: Not found worksheet index.
+    """
+    # dimension work sheet
     dimension = None
+    # name eg. Sheet 1
     ws_name = None
     ws = None
 
@@ -42,7 +55,7 @@ def get_ws(wb, ws_index):
     ws = wb[ws_name]
     if ws is None:
         ws = wb.active
-    LOGGER.info('worksheet: %s' % (ws_name))
+    LOGGER.info('getting working sheet: %s' % (ws_name))
 
     # checking dimension of file
     dimension = ws.calculate_dimension()
@@ -57,14 +70,12 @@ def read(filename, ws_index=0):
 
     Args:
         filename (string): file path.
-        ws (int): index work sheet.
 
     Returns:
         float: heat load index value
 
     Raises:
-        ValueError: If bg_temp, relat_hum and wind_speed not a number.
-                    If relat_hum or wind_speed is a negative number.
+        OSError: File not found.
     """
     wb = load_workbook(filename=filename, read_only=True)
     return wb
@@ -82,6 +93,7 @@ def find_col_by_re(pattern, ws, row_limit=None, col_limit=None):
     Returns:
         tuple: containing the row and column of the pattern instance.
     """
+    # TODO: check limit of row and column
     for row in ws.rows:
         # rcell equal cell read only
         for rcell in row:
