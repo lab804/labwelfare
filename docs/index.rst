@@ -24,4 +24,4 @@ If you have any suggestions or questions about **Lab Welfare** feel free to emai
 at mbsd@m0x.ru.
 
 If you encounter any errors or problems with **Lab Welfare**, please let me know!
-Open an Issue at the GitHub http://github.com/murilobsd/labwelfare main repository.
+Open an Issue at the GitHub http://github.com/lab804/labwelfare main repository.

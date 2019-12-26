@@ -4,10 +4,26 @@ labwelfare package
 Submodules
 ----------
 
-labwelfare.hli module
----------------------
+labwelfare.excel module
+-----------------------
 
-.. automodule:: labwelfare.hli
+.. automodule:: labwelfare.excel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+labwelfare.heat\_load module
+----------------------------
+
+.. automodule:: labwelfare.heat_load
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+labwelfare.processing module
+----------------------------
+
+.. automodule:: labwelfare.processing
    :members:
    :undoc-members:
    :show-inheritance:
